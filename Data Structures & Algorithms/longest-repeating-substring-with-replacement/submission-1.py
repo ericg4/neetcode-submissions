@@ -1,0 +1,23 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        res = 0
+
+        charSet = set(s)
+
+        for char in charSet:
+            count = 0
+            l = 0
+            
+            for r in range(len(s)):
+                if s[r] == char:
+                    count += 1
+                
+                if r - l + 1 - count <= k:
+                    res = max(r - l + 1, res)
+                
+                while r - l + 1 - count > k:
+                    if s[l] == char:
+                        count -= 1
+                    l += 1
+        
+        return res
